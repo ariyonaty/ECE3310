@@ -7,11 +7,19 @@
 #include <algorithm>
 #include <math.h>
 
+#define SIZE 51
+
 struct StatePopulation
 {
     std::string name;
     int population;
 };
+
+/* Print individual state population structure data */
+void printData(StatePopulation sp)
+{
+    std::cout << sp.name << " - " << sp.population << std::endl;
+}
 
 bool comparePopulation(const StatePopulation &a, const StatePopulation &b)
 {
@@ -23,18 +31,9 @@ bool compareName(const StatePopulation &a, const StatePopulation &b)
     return a.name < b.name;
 }
 
-void printData(std::vector<StatePopulation> sp)
-{
-    for (int i = 0; i < sp.size(); i++)
-    {
-        std::cout << sp[i].name << " - " << sp[i].population << std::endl;
-    }
-}
-
 int main(int argc, char const *argv[])
 {
-
-    std::vector<StatePopulation> statePops;
+    StatePopulation *statePops = new StatePopulation[51];
 
     std::ifstream file("nst-est2011-01.csv");
 
@@ -44,52 +43,53 @@ int main(int argc, char const *argv[])
     }
 
     std::string str;
+
     std::string area;
     int census, estimate, pop2010, pop2011;
     char delimiter;
 
-    for (int i = 0; i < 9; i++) // Skip the first 9 lines of CSV
+    for (int i = 0; i < 9; i++)
     {
         std::getline(file, str);
     }
 
-    StatePopulation sp; // temporary state population struct object for getting data and manipulating.
     std::string tmp;
 
+    int i = 0;
     while (getline(file, str) && !str.empty() && (str != ",,,,"))
     {
-        // std::cout << str << std::endl;
         std::stringstream stream(str);
         std::getline(stream, tmp, ',');
-        sp.name = tmp.substr(1);
+        statePops[i].name = tmp.substr(1);
         std::getline(stream, tmp, ',');
         std::getline(stream, tmp, ',');
         std::getline(stream, tmp, ',');
-        sp.population = std::stoi(tmp);
+        statePops[i].population = std::stoi(tmp);
         std::getline(stream, tmp, ',');
         if (!stream)
             break;
 
-        statePops.push_back(sp);
+        i++;
     }
 
     int sum = 0;
     double variance = 0;
-    for (int i = 0; i < statePops.size(); i++)
+
+    std::sort(statePops, statePops + SIZE, comparePopulation); // sort by population size
+
+    for (int i = 0; i < SIZE; i++)
     {
         sum += statePops[i].population;
     }
 
-    std::sort(statePops.begin(), statePops.end(), comparePopulation);
+    int mean = sum / SIZE;
+    int median = statePops[51 / 2].population;
 
-    int mean = sum / statePops.size();
-    int median = statePops[statePops.size() / 2].population;
-
-    for (int i = 0; i < statePops.size(); i++)
+    for (int i = 0; i < SIZE; i++)
     {
         variance += pow((statePops[i].population - mean), 2);
     }
-    variance = variance / (statePops.size() - 1);
+    variance = variance / (SIZE - 1);
     double stdDeviation = sqrt(variance);
 
     std::cout << "*******************************" << std::endl;
@@ -100,6 +100,8 @@ int main(int argc, char const *argv[])
     std::cout << "Variance: " << std::fixed << std::setprecision(2) << variance << std::endl;
     std::cout << "Standard Deviation: " << std::fixed << std::setprecision(2) << stdDeviation << std::endl;
     std::cout << "*******************************" << std::endl;
+
+    delete[] statePops;
 
     return 0;
 }
