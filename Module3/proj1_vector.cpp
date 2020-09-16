@@ -88,15 +88,30 @@ int main(int argc, char const *argv[])
         arrPop[i] = statePops[i].population;
     }
 
-    printData(statePops);
+    // printData(statePops);
     std::cout << "*******************" << std::endl;
     std::sort(statePops.begin(), statePops.end(), comparePopulation);
-    printData(statePops);
-    std::cout << "*******************" << std::endl;
-    std::sort(statePops.begin(), statePops.end(), compareName);
-    printData(statePops);
+    // printData(statePops);
+    // std::cout << "*******************" << std::endl;
+    // std::sort(statePops.begin(), statePops.end(), compareName);
+    // printData(statePops);
 
     mean = sum / statePops.size();
     std::cout << "*******************" << std::endl;
     std::cout << "Mean: " << mean << std::endl;
+    int median = statePops[statePops.size() / 2].population;
+    std::cout << "Median: " << median << std::endl;
+
+    double variance = 0;
+    for (int i = 0; i < statePops.size(); i++)
+    {
+        variance += pow((statePops[i].population - mean), 2);
+    }
+    variance = variance / (statePops.size() - 1);
+    std::cout << "Variance: " << std::fixed << variance << std::endl;
+    double stdDeviation = sqrt(variance);
+    std::cout << "Standard Deviation: " << std::fixed << stdDeviation << std::endl;
+    
+
+    return 0;
 }
