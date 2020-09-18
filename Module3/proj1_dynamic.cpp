@@ -1,11 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <sstream>
 #include <string>
-#include <vector>
-#include <algorithm>
-#include <math.h>
+#include <cmath>
 
 struct StatePopulation
 {
