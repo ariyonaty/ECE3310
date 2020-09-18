@@ -7,19 +7,11 @@
 #include <algorithm>
 #include <math.h>
 
-#define SIZE 51
-
 struct StatePopulation
 {
     std::string name;
     int population;
 };
-
-/* Print individual state population structure data */
-void printData(StatePopulation sp)
-{
-    std::cout << sp.name << " - " << sp.population << std::endl;
-}
 
 bool comparePopulation(const StatePopulation &a, const StatePopulation &b)
 {
@@ -31,67 +23,72 @@ bool compareName(const StatePopulation &a, const StatePopulation &b)
     return a.name < b.name;
 }
 
+/* Functions Prototypes */
+void printData(StatePopulation sp);
+void swap(int *x, int *y);
+void bubbleSort(int arr[], int n);
+
 int main(int argc, char const *argv[])
 {
-    StatePopulation *statePops = new StatePopulation[51];
+    int sum = 0, mean = 0, median = 0;
+    int arrIndex = 0, arrSize = 0;
+    double variance = 0, stdDeviation = 0;
+    std::string str, tmp;
 
-    std::ifstream file("nst-est2011-01.csv");
+    std::ifstream file("nst-est2011-01.csv"); // open csv file
 
-    if (!file.is_open())
+    if (!file.is_open()) // check if error occured when opening file
     {
         std::cerr << "Error opening file." << std::endl;
     }
 
-    std::string str;
-
-    std::string area;
-    int census, estimate, pop2010, pop2011;
-    char delimiter;
-
-    for (int i = 0; i < 9; i++)
+    while (getline(file, str) && !str.empty() && (str != ",,,,")) // get number of states by checking start of line with '.' from CSV
     {
-        std::getline(file, str);
+        if (str[0] == '.')
+            arrSize++;
     }
 
-    std::string tmp;
+    StatePopulation *statePops = new StatePopulation[arrSize]; // create dynamic array based on arrSize calculated above
+    int *tempArray = new int[arrSize];
 
-    int i = 0;
-    while (getline(file, str) && !str.empty() && (str != ",,,,"))
+    file.seekg(0); // go back to line 1 of file
+
+    while (getline(file, str) && !str.empty() && (str != ",,,,")) // parse CSV and store data in dynamic array
     {
+        if (str[0] != '.')
+            continue;
+
         std::stringstream stream(str);
         std::getline(stream, tmp, ',');
-        statePops[i].name = tmp.substr(1);
+        statePops[arrIndex].name = tmp.substr(1);
         std::getline(stream, tmp, ',');
         std::getline(stream, tmp, ',');
         std::getline(stream, tmp, ',');
-        statePops[i].population = std::stoi(tmp);
+        statePops[arrIndex].population = std::stoi(tmp);
+        sum += std::stoi(tmp);
+        tempArray[arrIndex] = std::stoi(tmp);
         std::getline(stream, tmp, ',');
         if (!stream)
             break;
 
-        i++;
+        arrIndex++;
     }
 
-    int sum = 0;
-    double variance = 0;
+    /* More elegant way to sort entire strucutre */
+    // std::sort(statePops, statePops + arrSize, comparePopulation); // sort by population size
+    bubbleSort(tempArray, arrSize);
 
-    std::sort(statePops, statePops + SIZE, comparePopulation); // sort by population size
+    mean = sum / arrSize;
+    median = tempArray[arrSize / 2];
 
-    for (int i = 0; i < SIZE; i++)
-    {
-        sum += statePops[i].population;
-    }
-
-    int mean = sum / SIZE;
-    int median = statePops[51 / 2].population;
-
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < arrSize; i++)
     {
         variance += pow((statePops[i].population - mean), 2);
     }
-    variance = variance / (SIZE - 1);
-    double stdDeviation = sqrt(variance);
+    variance = variance / (arrSize - 1);
+    stdDeviation = sqrt(variance);
 
+    /* Print Data */
     std::cout << "*******************************" << std::endl;
     std::cout << "    US 2010 POPULATION DATA" << std::endl;
     std::cout << "*******************************" << std::endl;
@@ -104,4 +101,29 @@ int main(int argc, char const *argv[])
     delete[] statePops;
 
     return 0;
+}
+
+
+void printData(StatePopulation sp)
+{
+    std::cout << sp.name << " - " << sp.population << std::endl;
+}
+
+void swap(int *x, int *y)
+{
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+void bubbleSort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+                swap(&arr[j], &arr[j + 1]);
+        }
+    }
 }
