@@ -1,3 +1,11 @@
-*.o
-*.out
-output
+*
+
+!.gitignore
+!*.cpp
+!*.c
+!*.h
+!*.md
+!.txt
+!LICENSE
+
+!*/
