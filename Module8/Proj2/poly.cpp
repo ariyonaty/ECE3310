@@ -60,6 +60,16 @@ public:
         return p;
     }
 
+    node *insert(int coeff, int exp)
+    {
+        node *p = new node(coeff, exp);
+
+        p->next = phead;
+        phead = p;
+
+        ++count;
+        return p;
+    }
     // node *insert(int coeff, int exp)
     // {
     //     node *p = new node(coeff, exp);
@@ -123,6 +133,10 @@ public:
         --count;
     }
 
+    /**
+     * Display list node-by-node
+     * Used for debugging.
+     */
     void display()
     {
         std::cout << "************* list *************" << std::endl;
@@ -177,27 +191,35 @@ public:
 
 int main(void)
 {
-    node_list n;
+    node_list poly1;
 
     // std::cout << "List Empty? " << std::boolalpha << n.is_empty() << std::endl;
     // n.empty();
     // n.display();
-    node *n1 = n.insert_front(1, 0);
+    node *n1 = poly1.insert_front(1, 0);
     // n.display();
-    n.insert(n1, 2, 3);
-    n.insert(n1, 2, 1);
-    n.insert(n1, 3, 4);
-    n.insert(n1, 3, 7);
-    n.insert(n1, 3, 1);
-    n.insert(n1, 3, 2);
+    poly1.insert(n1, 2, 3);
+    poly1.insert(n1, 2, 1);
+    poly1.insert(n1, 3, 4);
+    poly1.insert(n1, 3, 7);
+    poly1.insert(n1, 3, 1);
+    poly1.insert(n1, 3, 2);
     // n.display();
 
-    n.print_poly();
-    n.bubbleSort();
-    n.print_poly();
+    poly1.print_poly();
+    poly1.bubbleSort();
+    poly1.print_poly();
 
     // std::cout << "List Empty? " << std::boolalpha << n.is_empty() << std::endl;
     // n.empty();
+    node_list poly2;
+    poly2.insert(1,2);
+    poly2.insert(3,4);
+    poly2.insert(5,6);
+    
+    poly2.print_poly();
+    poly2.bubbleSort();
+    poly2.print_poly();
 
     return 0;
 }
