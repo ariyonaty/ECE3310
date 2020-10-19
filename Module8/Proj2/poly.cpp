@@ -116,16 +116,24 @@ public:
 
     void delete_front()
     {
-        delete_node(phead);
-    }
-
-    void delete_node(node *pnode)
-    {
-        if (pnode == nullptr)
+        if (phead == nullptr)
             return;
 
-        if (phead == pnode)
-            phead = pnode->next;
+        if (phead)
+            phead = phead->next;
+
+        --count;
+    }
+
+    void delete_node(node **pnode)
+    {
+        if (*pnode == nullptr)
+            return;
+
+        node *tmp = *pnode;
+        *pnode = (*pnode)->next;
+        delete tmp;
+
         --count;
     }
 
@@ -395,9 +403,9 @@ int main(void)
 
     node_list poly1, poly2, polyRes;
     poly1.insert(1, 0);
-    poly1.insert(2, 3);
+    node *n2 = poly1.insert(2, 3);
     poly1.insert(3, 12);
-    poly1.insert(4, 25);
+    node *n3 = poly1.insert(4, 25);
     poly1.insert(5, 99);
     poly1.bubbleSort();
     poly1.print_poly();
@@ -417,6 +425,12 @@ int main(void)
     polyRes.removeDuplicates();
 
     polyRes.print_poly();
+
+    std::cout << "------------------" << std::endl;
+
+    poly1.print_poly();
+    poly1.delete_node(&n2->next);
+    poly1.print_poly();
     // polyRes.display();
 
     return 0;
