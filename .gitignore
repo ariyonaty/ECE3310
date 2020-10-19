@@ -1,5 +1,11 @@
-.gitignore
-*.o
-*.out
-*.opendb
-output
+*
+
+!.gitignore
+!*.cpp
+!*.c
+!*.h
+!*.md
+!.txt
+!LICENSE
+
+!*/
