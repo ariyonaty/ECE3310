@@ -106,30 +106,7 @@ void Stack::output()
 
 int main(void)
 {
-    // node *p = nullptr;
-
-    // // push onto the front of the 'stack'
-    // p = new node(123, p);
-    // p = new node(456, p);
-    // p = new node(789, p);
-
-    // node *tmp = p;
-    // p = p->next;        // p now points to 456 node
-    // delete tmp;
-
     Stack myStack = Stack();
-
-    // myStack.display();
-    // myStack.push(123);
-    // myStack.push(456);
-    // myStack.push(789);
-    // myStack.display();
-    // myStack.pop();
-    // myStack.display();
-    // myStack.push(789);
-    // myStack.display();
-    // myStack.clear();
-    // myStack.display();
 
     int num, remainder;
     std::cout << "*******************************" << std::endl;
