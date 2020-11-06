@@ -25,7 +25,7 @@ int main(void)
     list.insert(f);
     list.insert(g);
 
-    std::cout << "\n[+]The travel path is: " << std::endl;
+    std::cout << "\n[+] The travel path is: " << std::endl;
     list.display();
 
     return EXIT_SUCCESS;

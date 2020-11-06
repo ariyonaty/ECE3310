@@ -3,16 +3,27 @@
 #include <limits>
 #include "dll.h"
 
+/**
+ * Constructor
+ */
 DLL::DLL()
 {
 }
 
+/**
+ * Deconstructor
+ */
 DLL::~DLL()
 {
     while (count > 0)
         delete_front();
 }
 
+/**
+ * Insert function at closest node
+ * 
+ * @param   p - pointer to node to insert
+ */
 Node *DLL::insert(Node *p)
 {
     std::cout << "[+] Inserting node " << p->letter << " into list" << std::endl;
@@ -61,6 +72,13 @@ Node *DLL::insert(Node *p)
     return p;
 }
 
+/**
+ * Calculates distance between two nodes
+ * 
+ * @param   pNew - pointer to new node to add
+ * @param   pIter - pointer to node to comapare distance to
+ * @return  distance between pNew and pIter
+ */
 double DLL::distance(Node *pNew, Node *pIter)
 {
     int x1 = pNew->x_coor;
@@ -71,6 +89,11 @@ double DLL::distance(Node *pNew, Node *pIter)
     return sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
 }
 
+/**
+ * Inserts node at front of list
+ * 
+ * @param   p - pointer to node to insert
+ */
 Node *DLL::insert_front(Node *p)
 {
     p->next = phead;
@@ -87,6 +110,11 @@ Node *DLL::insert_front(Node *p)
     return p;
 }
 
+/**
+ * Inserts node at back of list
+ * 
+ * @param   p - pointer to node to insert
+ */
 Node *DLL::insert_back(Node *p)
 {
     p->prev = ptail;
@@ -126,16 +154,27 @@ Node *DLL::insert_after(Node *p, Node *pnode)
     return p;
 }
 
+/**
+ * Delete node at head of list
+ */
 void DLL::delete_front()
 {
     delete_node(phead);
 }
 
+/**
+ * Delete node at tail of list
+ */
 void DLL::delete_back()
 {
     delete_node(ptail);
 }
 
+/** 
+ * Delete node specified
+ * 
+ * @param   pnode - pointer to node to delete
+ */
 void DLL::delete_node(Node *pnode)
 {
     if (pnode == nullptr)
@@ -151,26 +190,46 @@ void DLL::delete_node(Node *pnode)
     --count;
 }
 
+/**
+ * Return head node
+ */
 Node *DLL::front()
 {
     return phead;
 }
 
+/**
+ * Return tail node
+ */
 Node *DLL::back()
 {
     return ptail;
 }
 
+/**
+ * Return next node
+ * 
+ * @param   pnode - pointer to node
+ */
 Node *DLL::next(Node *pnode)
 {
     return pnode->next;
 }
 
+/**
+ * Return prev node
+ * 
+ * @param   pnode - pointer to node
+ */
 Node *DLL::prev(Node *pnode)
 {
     return pnode->prev;
 }
 
+/**
+ * Dumping function.
+ * Used for debugging.
+ */
 void DLL::dump()
 {
     std::cout << "************* list *************" << std::endl;
@@ -189,6 +248,10 @@ void DLL::dump()
     }
 }
 
+/**
+ * Actual list display function.
+ * Outputs only what necessary.
+ */
 void DLL::display()
 {
     std::cout << "************* path *************" << std::endl;
