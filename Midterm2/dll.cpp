@@ -15,6 +15,8 @@ DLL::~DLL()
 
 Node *DLL::insert(Node *p)
 {
+    std::cout << "[+] Inserting node " << p->letter << " into list" << std::endl;
+
     if (phead == nullptr)
     {
         insert_front(p);
@@ -194,7 +196,7 @@ void DLL::display()
     Node *p = phead;
     while(p)
     {
-        std::cout << "(" << p->x_coor << ", " << p->y_coor << ")";
+        std::cout << p->letter << "(" << p->x_coor << ", " << p->y_coor << ")";
         if (p->next)
             std::cout << " --> ";
 
