@@ -27,8 +27,8 @@ public:
     void clear();
     void push(int data);
     void pop();
-    void display();         
-    void output();          
+    void display()
+    void output();
 };
 
 /**
@@ -50,7 +50,7 @@ Stack::~Stack()
 
 /**
 * Checks if stack is empty.
-*   
+*
 * @return   bool - true if empty; false otherwise
 */
 bool Stack::empty()
