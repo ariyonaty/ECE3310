@@ -21,7 +21,6 @@ private:
     };
 
 public:
-
     bool isEmpty() const
     {
         return _size == 0;
@@ -43,7 +42,7 @@ public:
 void MaxHeap::display()
 {
     for (auto &&i : vect)
-    {   
+    {
         std::cout << i << " ";
     }
     std::cout << std::endl;
@@ -86,7 +85,7 @@ void MaxHeap::shiftDown(int i)
         swapId = l(i);
     }
 
-    if (r(i) <= _size && vect[i] < vect[r(i)])
+    if (r(i) <= _size && vect[swapId] < vect[r(i)])
     {
         swapId = r(i);
     }
@@ -119,7 +118,7 @@ int main(void)
     PriorityQueue->insertItem(5);
 
     PriorityQueue->display();
-    
+
     std::cout << PriorityQueue->getMax() << std::endl;
     PriorityQueue->extractMax();
     std::cout << PriorityQueue->getMax() << std::endl;
