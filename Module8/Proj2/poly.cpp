@@ -254,7 +254,7 @@ public:
 
     void empty()
     {
-        if (this->phead == nullptr)
+        if (is_empty())
         {
             std::cout << "List is empty." << std::endl;
         }
@@ -402,6 +402,9 @@ int main(void)
     polyRes.print_poly(); */
 
     node_list poly1, poly2, polyRes;
+
+    poly1.empty();
+
     poly1.insert(1, 0);
     node *n2 = poly1.insert(2, 3);
     poly1.insert(3, 12);
@@ -416,6 +419,7 @@ int main(void)
     poly2.bubbleSort();
     poly2.print_poly();
 
+    std::cout << "AFTER ADDING------------------" << std::endl;
     polyRes.add(poly1, poly2);
     polyRes.bubbleSort();
     polyRes.print_poly();
@@ -428,9 +432,11 @@ int main(void)
 
     std::cout << "------------------" << std::endl;
 
-    poly1.print_poly();
-    poly1.delete_node(&n2->next);
-    poly1.print_poly();
+    // poly1.empty();
+
+    // poly1.print_poly();
+    // poly1.delete_node(&n2->next);
+    // poly1.print_poly();
     // polyRes.display();
 
     return 0;

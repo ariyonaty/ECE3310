@@ -7,7 +7,6 @@ class Poly
 {
 private:
     int count = {0};
-    // Node *phead = {nullptr};
 
     Node *swap(Node *n1, Node *n2);
     void sort();
