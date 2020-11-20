@@ -85,7 +85,7 @@ void Graph::shortestPath(int s)
 
         for (int i = 0; i < V; i++)
         {
-            std::cout << "Vertex: " << i << "\tDistance" << distances[i] << std::endl;
+            std::cout << "Vertex: " << i << "\tDistance " << distances[i] << std::endl;
         }
     }
 }
