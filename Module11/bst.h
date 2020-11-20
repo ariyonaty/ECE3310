@@ -22,13 +22,14 @@ private:
     node *root;
 
     void AddLeaf(int key, node* p);
+    void PrintInOrder(node* p);
 
 public:
     BST();
-    ~BST();
 
     node *CreateLeaf(int key);
     void AddLeaf(int key);
+    void PrintInOrder();
 };
 
 #endif /* BST_H */
