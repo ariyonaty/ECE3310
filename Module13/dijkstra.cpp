@@ -80,9 +80,8 @@ void Graph::shortestPath(int s)
                 extract_set.insert(std::make_pair(distances[v], v));
             }
         }
-
-        std::cout << "Minimum distances from vertex: " << s << std::endl;
     }
+    std::cout << "Minimum distances from vertex: " << s << std::endl;
     for (int i = 0; i < V; i++)
     {
         std::cout << "Vertex: " << i << "\tDistance " << distances[i] << std::endl;
