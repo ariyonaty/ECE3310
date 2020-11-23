@@ -19,5 +19,13 @@ int main(void)
     std::cout << "[+] Printing tree in order after adding numbers" << std::endl;
     bst.PrintInOrder();
 
+    // bst.PrintChildren(bst.ReturnRootKey());
+    for (int i = 0; i < 16; i++)
+    {
+        bst.PrintChildren(TreeKeys[i]);
+        std::cout << std::endl;
+    }
+
+
     return EXIT_SUCCESS;
 }

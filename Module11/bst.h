@@ -21,8 +21,9 @@ private:
 
     node *root;
 
-    void AddLeaf(int key, node* p);
-    void PrintInOrder(node* p);
+    void AddLeaf(int key, node *p);
+    void PrintInOrder(node *p);
+    node *ReturnNode(int key, node *p);
 
 public:
     BST();
@@ -30,6 +31,9 @@ public:
     node *CreateLeaf(int key);
     void AddLeaf(int key);
     void PrintInOrder();
+    node *ReturnNode(int key);
+    int ReturnRootKey();
+    void PrintChildren(int key);
 };
 
 #endif /* BST_H */

@@ -79,3 +79,63 @@ void BST::PrintInOrder(node *p)
         std::cout << "The tree is empty." << std::endl;
     }
 }
+
+BST::node *BST::ReturnNode(int key)
+{
+    return ReturnNode(key, root);
+}
+
+BST::node *BST::ReturnNode(int key, node *p)
+{
+    if (p)
+    {
+        if (p->key == key)
+        {
+            return p;
+        }
+        else
+        {
+            if (key < p->key)
+            {
+                return ReturnNode(key, p->left);
+            }
+            else
+            {
+                return ReturnNode(key, p->right);
+            }
+        }
+    }
+    else
+    {
+        return nullptr;
+    }
+}
+
+int BST::ReturnRootKey()
+{
+    if (root)
+    {
+        return root->key;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+void BST::PrintChildren(int key)
+{
+    node *ptr = ReturnNode(key);
+
+    if (ptr)
+    {
+        std::cout << "Parent Node = " << ptr->key << std::endl;
+
+        ptr->left == nullptr ? std::cout << "Left child = nullptr" << std::endl : std::cout << "Left child = " << ptr->left->key << std::endl;
+        ptr->right == nullptr ? std::cout << "Right child = nullptr" << std::endl : std::cout << "Right child = " << ptr->right->key << std::endl;
+    }
+    else
+    {
+        std::cout << "Key " << key << " is not in the tree." << std::endl;
+    }
+}
