@@ -26,6 +26,7 @@ int main(void)
         std::cout << std::endl;
     }
 
+    std::cout << "Smallest value in tree: " << bst.FindSmallest() << std::endl;
 
     return EXIT_SUCCESS;
 }

@@ -24,6 +24,10 @@ private:
     void AddLeaf(int key, node *p);
     void PrintInOrder(node *p);
     node *ReturnNode(int key, node *p);
+    int FindSmallest(node *p);
+    void RemoveNode(int key, node *parent);
+    void RemoveRootMatch();
+    
 
 public:
     BST();
@@ -34,6 +38,8 @@ public:
     node *ReturnNode(int key);
     int ReturnRootKey();
     void PrintChildren(int key);
+    int FindSmallest();
+    void RemoveNode(int key);
 };
 
 #endif /* BST_H */

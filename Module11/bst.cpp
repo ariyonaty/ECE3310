@@ -139,3 +139,131 @@ void BST::PrintChildren(int key)
         std::cout << "Key " << key << " is not in the tree." << std::endl;
     }
 }
+
+int BST::FindSmallest(node *p)
+{
+    if (!root)
+    {
+        std::cout << "The tree is empty." << std::endl;
+        return -2;
+    }
+    else
+    {
+        if (p->left)
+        {
+            return FindSmallest(p->left);
+        }
+        else
+        {
+            return p->key;
+        }
+    }
+}
+
+int BST::FindSmallest()
+{
+    return FindSmallest(root);
+}
+
+void BST::RemoveNode(int key)
+{
+    RemoveNode(key, root);
+}
+
+void BST::RemoveNode(int key, node *parent)
+{
+    if (root)
+    {
+        if (root->key == key)
+        {
+            // RemoveRootMatch();
+        }
+        else
+        {
+            if (key < parent->key && parent->left)
+            {
+                parent->left->key == key ? RemoveMatch(parent, parent->left, true) : RemoveNode(key, parent->left);
+            }
+            else if (key > parent->key && parent->right)
+            {
+                parent->right->key == key ? RemoveMatch(parent, parent->right, false) : RemoveNode(key, parent->right);
+            }
+            else
+            {
+                std::cout << "Key not found in tree." << std::endl;
+            }
+        }
+    }
+    else
+    {
+        std::cout << "The tree is empty." << std::endl;
+    }
+}
+
+void BST::RemoveRootMatch()
+{
+    if (root)
+    {
+        node *tmp = root;
+        int rootKey = root->key;
+        int smallestInRightSubtree;
+
+        // Case 0: 0 children
+        if (!root->left && !root->right)
+        {
+            root = nullptr;
+            delete tmp;
+        }
+        // Case 1 - 1 child
+        else if (!root->left && root->right)
+        {
+            root = root->right;
+            tmp->right = nullptr;
+            delete tmp;
+            std::cout << "The root node with key " << rootKey << " was deleted. The new root contains key " << root->key << std::endl;
+        }
+        else if (root->left && !root->right)
+        {
+            root = root->left;
+            tmp->left = nullptr;
+            delete tmp;
+            std::cout << "The root node with key " << rootKey << " was deleted. The new root contains key " << root->key << std::endl;
+        }
+        // Case 2 - 2 children
+        else
+        {
+            smallestInRightSubtree = FindSmallest(root->right);
+            RemoveNode(smallestInRightSubtree, root);
+            root->key = smallestInRightSubtree;
+            std::cout << "The root key with key " << rootKey << " was overwritten with key " << root->key << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Cannot remove root. Tree is "
+    }
+}
+
+void BST::RemoveMatch(node *parent, node *match, bool left)
+{
+    if (root)
+    {
+        node *tmp;
+        int matchKey = match->key;
+        int smallestInRightSubtree;
+
+        // Case 0: 0 children
+        if (!match->left && !match->right)
+        {
+            tmp = match;
+            left == true ? parent->left = nullptr : parent->right = nullptr;
+            delete tmp;
+            std::cout << "Node containing key " << matchKey << " was removed." << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Cannot remove match. Tree is empty." << std::endl;
+    }
+    
+}
