@@ -27,7 +27,7 @@ private:
     int FindSmallest(node *p);
     void RemoveNode(int key, node *parent);
     void RemoveRootMatch();
-    
+    void RemoveMatch(node *parent, node* match, bool left);
 
 public:
     BST();

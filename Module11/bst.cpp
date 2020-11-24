@@ -240,7 +240,7 @@ void BST::RemoveRootMatch()
     }
     else
     {
-        std::cout << "Cannot remove root. Tree is "
+        std::cout << "Cannot remove root. Tree is empty." << std::endl;
     }
 }
 
@@ -260,10 +260,33 @@ void BST::RemoveMatch(node *parent, node *match, bool left)
             delete tmp;
             std::cout << "Node containing key " << matchKey << " was removed." << std::endl;
         }
+        // Case 1: 1 child
+        else if (!match->left && match->right)
+        {
+            left == true ? parent->left = match->right : parent->right = match->right;
+            match->right = nullptr;
+            tmp = match;
+            delete tmp;
+            std::cout << "Node containing key " << matchKey << " was removed." << std::endl;
+        }
+        else if (match->left && !match->right)
+        {
+            left == true ? parent->left = match->left : parent->right = match->left;
+            match->left = nullptr;
+            tmp = match;
+            delete tmp;
+            std::cout << "Node containing key " << matchKey << " was removed." << std::endl;
+        }
+        // Case 2: 2 children
+        else
+        {
+            smallestInRightSubtree = FindSmallest(match->right);
+            RemoveNode(smallestInRightSubtree, match);
+            match->key = smallestInRightSubtree;
+        }
     }
     else
     {
         std::cout << "Cannot remove match. Tree is empty." << std::endl;
     }
-    
 }
