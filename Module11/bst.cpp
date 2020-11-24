@@ -176,7 +176,7 @@ void BST::RemoveNode(int key, node *parent)
     {
         if (root->key == key)
         {
-            // RemoveRootMatch();
+            RemoveRootMatch();
         }
         else
         {
