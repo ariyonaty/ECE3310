@@ -290,3 +290,25 @@ void BST::RemoveMatch(node *parent, node *match, bool left)
         std::cout << "Cannot remove match. Tree is empty." << std::endl;
     }
 }
+
+void BST::RemoveSubtree(node *p)
+{
+    if (p)
+    {
+        if (p->left)
+        {
+            RemoveSubtree(p->left);
+        }
+        if (p->right)
+        {
+            RemoveSubtree(p->right);
+        }
+        std::cout << "Deleting node containing key: " << p->key << std::endl;
+        delete p;
+    }
+}
+
+BST::~BST()
+{
+    RemoveSubtree(root);
+}

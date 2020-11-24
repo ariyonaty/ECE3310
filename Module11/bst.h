@@ -28,14 +28,16 @@ private:
     void RemoveNode(int key, node *parent);
     void RemoveRootMatch();
     void RemoveMatch(node *parent, node* match, bool left);
+    node *CreateLeaf(int key);
+    node *ReturnNode(int key);
+    void RemoveSubtree(node* p);
 
 public:
     BST();
+    ~BST();
 
-    node *CreateLeaf(int key);
     void AddLeaf(int key);
     void PrintInOrder();
-    node *ReturnNode(int key);
     int ReturnRootKey();
     void PrintChildren(int key);
     int FindSmallest();
